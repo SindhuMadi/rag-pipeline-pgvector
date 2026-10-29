@@ -33,5 +33,10 @@ ingest documents, chunk, embed, store vectors, retrieve, and answer with an LLM.
 
             If above query returns a small number back, it means vector math is working.
         
+- Day 2: embeddings
+    1. Create embeddings_demo.py
+            When you run the python file, you can notice the distance is smaller for related meaning even with no shared words.
+
+    2. Try with diffrent queries using related, somewhat related and unrrelated contexts and observe the distances.
 
     
