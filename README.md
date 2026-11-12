@@ -11,7 +11,7 @@ ingest documents, chunk, embed, store vectors, retrieve, and answer with an LLM.
 - sentence-transformers for embeddings
 
 ## Learning log
-- Day 1: environment setup, repo structure
+- Environment setup, repo structure
     1. Check if Docker and Python are working using below commands
         docker --version
         python --version
@@ -33,10 +33,23 @@ ingest documents, chunk, embed, store vectors, retrieve, and answer with an LLM.
 
             If above query returns a small number back, it means vector math is working.
         
-- Day 2: embeddings
+- Embeddings
     1. Create embeddings_demo.py
             When you run the python file, you can notice the distance is smaller for related meaning even with no shared words.
 
     2. Try with diffrent queries using related, somewhat related and unrrelated contexts and observe the distances.
 
-    
+- Data Source:
+        Around 28 pdfs with Data Engineering related documents, books and research papers.
+
+- Ingest data into Database
+        Ingest the data from data folder into postgres DB
+            Refer: ingest.py
+
+- Chunking
+        Divide the documents into smaller chunks 
+            Refer: chunking.py
+
+- Embedding
+        Create embeddings for the chunks and load them into chunks table.
+            Refer: embed_chunks.py
