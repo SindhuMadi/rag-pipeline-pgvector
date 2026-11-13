@@ -48,6 +48,18 @@ def clean(text: str) -> str:
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
 
+def get_topic(path: Path) -> str:
+    parts = path.relative_to(RAW_DIR).parts
+    
+    if len(parts)<=1:
+        return "unknown"
+    else:
+        return parts[0]
+    
+    # TODO: if the file has no subfolder, what is len(parts)?
+    #       return "unknown" in that case
+    # TODO: otherwise return the first folder name
+
 def is_hidden(path: Path) -> bool:
     parts = path.relative_to(RAW_DIR).parts
     return any(part.startswith(".") for part in parts)
@@ -76,7 +88,8 @@ def main():
                 source_path text UNIQUE NOT NULL,
                 content text NOT NULL,
                 content_hash text NOT NULL,
-                ingested_at timestamptz DEFAULT now()
+                ingested_at timestamptz DEFAULT now(),
+                topic text NOT NULL
             )
             """
         )
@@ -90,7 +103,9 @@ def main():
                     skipped += 1
                     continue
                 digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+                path_topic = get_topic(path)
                 
+                #print(path.name, "->", path_topic)
                 dup = conn.execute(
                         "SELECT source_path FROM documents "
                         "WHERE content_hash = %s AND source_path <> %s LIMIT 1",
@@ -103,15 +118,16 @@ def main():
                 
                 conn.execute(
                     """
-                    INSERT INTO documents (source_path, content, content_hash)
-                    VALUES (%s, %s, %s)
+                    INSERT INTO documents (source_path, content, content_hash, topic)
+                    VALUES (%s, %s, %s, %s)
                     ON CONFLICT (source_path) DO UPDATE
                       SET content = EXCLUDED.content,
                           content_hash = EXCLUDED.content_hash,
-                          ingested_at = now()
-                      WHERE documents.content_hash <> EXCLUDED.content_hash
+                          ingested_at = now(),
+                          topic = EXCLUDED.topic
+                      WHERE documents.content_hash <> EXCLUDED.content_hash OR documents.topic IS DISTINCT FROM EXCLUDED.topic
                     """,
-                    (str(path), text, digest),
+                    (str(path), text, digest, path_topic),
                 )
                 loaded += 1
             except Exception as exc:
