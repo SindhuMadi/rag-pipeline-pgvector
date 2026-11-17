@@ -1,0 +1,31 @@
+[
+  {"question": "How does stream processing differ from batch processing in when and how data is handled?",
+   "expected_sources": ["data/raw/guides/Batch , Stream and real time processing.pdf"]},
+
+  {"question": "How does Delta Lake's internal architecture keep a table consistent when many pipelines write to it at once?",
+   "expected_sources": ["data/raw/papers/A-Lakehouse-Implementation-using-Delta-Lake-1.pdf", "data/raw/papers/p3411-armbrust.pdf"]},
+
+  {"question": "What optimizations does Databricks provide to improve BI workload performance?",
+   "expected_sources": ["data/raw/papers/p3411-armbrust.pdf", "data/raw/papers/cidr2021_paper17.pdf"]},
+
+  {"question": "How does Kafka achieve efficient message delivery?",
+   "expected_sources": ["data/raw/papers/Kafka.pdf"]},
+
+  {"question": "What are the different components used in Azure Databricks to structure, access, and manage data?",
+   "expected_sources": ["data/raw/guides/Data engineering Guide.pdf"]},
+
+  {"question": "How does Google Kubernetes Engine ensure application availability, scalability, security, and simplified infrastructure management?",
+   "expected_sources": ["data/raw/slides/CoursePresentation-GoogleCloudProfessionalCloudArchitect.pdf", "data/raw/slides/CoursePresentation-GoogleCertifiedAssociateCloudEngineer.pdf"]},
+
+  {"question": "What role do data engineers play in getting machine learning models into production?",
+   "expected_sources": ["data/raw/guides/AI & ML for Data Engineers.pdf"]},
+
+  {"question": "What problem with data lakes was Delta Lake designed to fix?",
+   "expected_sources": ["data/raw/guides/The-Data-Lakehouse-Platform-For-Dummies-1.pdf", "data/raw/papers/A-Lakehouse-Implementation-using-Delta-Lake-1.pdf", "data/raw/papers/p3411-armbrust.pdf"]},
+
+  {"question": "How does Databricks track machine learning models and control who can access AI assets?",
+   "expected_sources": ["data/raw/guides/databricks-etl-to-gen-ai.pdf"]},
+
+  {"question": "What three properties does the paper say will define the architecture that replaces the data warehouse?",
+   "expected_sources": ["data/raw/papers/cidr2021_paper17.pdf"]}
+]
